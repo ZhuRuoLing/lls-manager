@@ -60,7 +60,7 @@ import java.util.concurrent.ConcurrentSkipListSet;
 @Plugin(
         id = "lls-manager",
         name = "LlsManager",
-        version = "@version@",
+        version = "0.1.2",
         description = "Lls Manager",
         url = "https://github/plusls/lls-manager",
         authors = {"plusls"},
