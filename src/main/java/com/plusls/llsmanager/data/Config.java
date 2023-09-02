@@ -45,6 +45,15 @@ public class Config extends AbstractConfig<Config.ConfigData> {
         return save();
     }
 
+    public boolean getRememberLastServer(){
+        return config.rememberLastServer;
+    }
+
+    public boolean setRememberLastServer(boolean bl){
+        config.rememberLastServer = bl;
+        return save();
+    }
+
     public boolean getDefaultOnlineMode() {
         return config.defaultOnlineMode;
     }
@@ -159,6 +168,8 @@ public class Config extends AbstractConfig<Config.ConfigData> {
         private boolean bridgePlayerJoinMessage = false;
         // 是否同步玩家离开信息
         private boolean bridgePlayerLeaveMessage = false;
+        // 是否记住上一次离开的服务器
+        private boolean rememberLastServer = false;
         // 白名单
         private boolean whitelist = false;
         // 默认为在线模式

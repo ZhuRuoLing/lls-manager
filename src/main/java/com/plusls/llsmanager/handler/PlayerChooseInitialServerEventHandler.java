@@ -1,6 +1,7 @@
 package com.plusls.llsmanager.handler;
 
 import com.plusls.llsmanager.LlsManager;
+import com.plusls.llsmanager.data.Config;
 import com.plusls.llsmanager.data.LlsPlayer;
 import com.velocitypowered.api.event.EventHandler;
 import com.velocitypowered.api.event.player.PlayerChooseInitialServerEvent;
@@ -16,12 +17,13 @@ public class PlayerChooseInitialServerEventHandler implements EventHandler<Playe
     @Override
     public void execute(PlayerChooseInitialServerEvent event) {
         LlsPlayer llsPlayer = llsManager.getLlsPlayer(event.getPlayer());
-        String serverName;
         if (llsPlayer.getOnlineMode()) {
-            serverName = llsPlayer.getLastServerName();
+            if (llsManager.config.getRememberLastServer()){
+                llsManager.server.getServer(llsPlayer.getLastServerName()).ifPresent(event::setInitialServer);
+            }
         } else {
-            serverName = llsManager.config.getAuthServerName();
+            llsManager.server.getServer(llsManager.config.getAuthServerName()).ifPresent(event::setInitialServer);
         }
-        llsManager.server.getServer(serverName).ifPresent(event::setInitialServer);
+
     }
 }
