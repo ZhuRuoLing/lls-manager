@@ -1,6 +1,6 @@
 package com.plusls.llsmanager.grpc;
 
-import io.grpc.stub.StreamObserver;
+//import io.grpc.stub.StreamObserver;
 
 public class LlsGrpcServer {
     //    private Server server;
@@ -30,13 +30,13 @@ public class LlsGrpcServer {
 //        }
 //    }
 //
-    private static class HelloIml extends LlsManagerGrpc.LlsManagerImplBase {
-        @Override
-        public void sayHello(HelloRequest request, StreamObserver<HelloReply> responseObserver) {
-//             super.sayHello(request, responseObserver);
-            HelloReply helloResponse = HelloReply.newBuilder().setMessage("Hello " + request.getName() + ", I'm Java grpc Server").build();
-            responseObserver.onNext(helloResponse);
-            responseObserver.onCompleted();
-        }
-    }
+//    private static class HelloIml extends LlsManagerGrpc.LlsManagerImplBase {
+//        @Override
+//        public void sayHello(HelloRequest request, StreamObserver<HelloReply> responseObserver) {
+////             super.sayHello(request, responseObserver);
+//            HelloReply helloResponse = HelloReply.newBuilder().setMessage("Hello " + request.getName() + ", I'm Java grpc Server").build();
+//            responseObserver.onNext(helloResponse);
+//            responseObserver.onCompleted();
+//        }
+//    }
 }

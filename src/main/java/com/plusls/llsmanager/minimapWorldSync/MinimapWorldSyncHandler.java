@@ -3,6 +3,7 @@ package com.plusls.llsmanager.minimapWorldSync;
 import com.google.inject.Singleton;
 import com.plusls.llsmanager.LlsManager;
 import com.plusls.llsmanager.util.PacketUtil;
+import com.plusls.llsmanager.util.ReflectUtil;
 import com.velocitypowered.api.event.Subscribe;
 import com.velocitypowered.api.event.connection.PluginMessageEvent;
 import com.velocitypowered.api.network.ProtocolVersion;
@@ -20,7 +21,7 @@ public class MinimapWorldSyncHandler {
     private static final MinecraftChannelIdentifier VOXEL_CHANNEL = MinecraftChannelIdentifier.create("worldinfo", "world_id");
 
     public static void init(LlsManager llsManager) {
-        StateRegistry.PacketRegistry toReplace = StateRegistry.PLAY.clientbound;
+        StateRegistry.PacketRegistry toReplace = ReflectUtil.accessStateRegistryPlayClientbound();
         PacketUtil.registerPacketHandler(toReplace, PlayerSpawnPosition.class, PlayerSpawnPosition::new,
                 PacketUtil.map(0x5, ProtocolVersion.MINECRAFT_1_7_2, false),
                 PacketUtil.map(0x43, ProtocolVersion.MINECRAFT_1_9, false),
