@@ -1,4 +1,6 @@
-# lls-manager
+# lls-manager 黑船服版
+
+### 砍掉了小地图,seen,offline auth，tablist
 
 A velocity plugin to manage server, such as whitelist, chat bridge, remember last server, offline auth.
 

@@ -8,19 +8,12 @@ import com.google.inject.Singleton;
 import com.google.inject.name.Named;
 import com.plusls.llsmanager.command.LlsAlertRawCommand;
 import com.plusls.llsmanager.command.LlsChannelCommand;
-import com.plusls.llsmanager.command.LlsCreatePlayerCommand;
-import com.plusls.llsmanager.command.LlsPlayerCommand;
 import com.plusls.llsmanager.data.Config;
 import com.plusls.llsmanager.data.LlsPlayer;
 import com.plusls.llsmanager.handler.DisconnectEventHandler;
 import com.plusls.llsmanager.handler.PlayerChatEventHandler;
 import com.plusls.llsmanager.handler.PlayerChooseInitialServerEventHandler;
 import com.plusls.llsmanager.handler.ServerConnectedEventHandler;
-import com.plusls.llsmanager.minimapWorldSync.MinimapWorldSyncHandler;
-import com.plusls.llsmanager.offlineAuth.OfflineAuthHandler;
-import com.plusls.llsmanager.seen.SeenHandler;
-import com.plusls.llsmanager.serverGroup.LlsServerGroupCommand;
-import com.plusls.llsmanager.tabListSync.TabListSyncHandler;
 import com.plusls.llsmanager.util.LoadPlayerFailException;
 import com.plusls.llsmanager.util.PlayerNotFoundException;
 import com.plusls.llsmanager.util.TextUtil;
@@ -158,22 +151,13 @@ public class LlsManager {
         load();
         // 注册本地化字符
         registerTranslations();
-        SeenHandler.init(this);
-        TabListSyncHandler.init(this);
-        MinimapWorldSyncHandler.init(this);
         WhitelistHandler.init(this);
-        OfflineAuthHandler.init(this);
-        commandManager.register(injector.getInstance(LlsServerGroupCommand.class).createBrigadierCommand());
-
         PlayerChooseInitialServerEventHandler.init(this);
         ServerConnectedEventHandler.init(this);
         PlayerChatEventHandler.init(this);
         DisconnectEventHandler.init(this);
 
         LlsChannelCommand.register(this);
-        LlsPlayerCommand.register(this);
-        LlsCreatePlayerCommand.register(this);
-
         LlsAlertRawCommand.register(this);
 
         logger.info("Lls-Manager load success!");
@@ -235,6 +219,7 @@ public class LlsManager {
     }
 
     // from velocity FileSystemUtils, VelocityServer
+    @SuppressWarnings("all")
     private void registerTranslations() {
         logger.info("Loading localizations...");
         final TranslationRegistry translationRegistry = TranslationRegistry
@@ -268,6 +253,8 @@ public class LlsManager {
             e.printStackTrace();
             throw new IllegalStateException(e);
         }
+
+
         GlobalTranslator.get().addSource(translationRegistry);
     }
 
